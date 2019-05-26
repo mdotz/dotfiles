@@ -1,0 +1,10 @@
+# .config
+ln -sv alacritty/ ~/.config/
+ln -sv fish/      ~/.config/
+ln -sv i3/        ~/.config/
+ln -sv polybar/   ~/.config/
+ln -sv ranger/    ~/.config/
+
+# ~
+ln -sv .xinitrc   ~/
+ln -sv .bashrc    ~/
