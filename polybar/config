@@ -19,7 +19,7 @@
 [colors]
 ;background = ${xrdb:color0:#222}
 ;background = #afd96cbe
-background = #5f8cb8c5
+background = #af8cb8c5
 background-alt = #8cb8c5
 ;foreground = ${xrdb:color7:#222}
 ;foreground = #dfdfdf
@@ -110,7 +110,6 @@ type = internal/fs
 interval = 25
 
 mount-0 = /
-mount-1 = /home
 
 format-mounted = <ramp-capacity><label-mounted>
 format-unmounted = <label-unmounted>
