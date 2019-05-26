@@ -59,7 +59,7 @@ font-2 = NotoSansMonoNerdFont:fontformat=truetype:size=1:antialias=true;1
 
 modules-left = bspwm i3
 modules-center = ewmh
-modules-right = filesystem memory temperature cpu eth wlan xbacklight pulseaudio battery date
+modules-right = filesystem memory temperature cpu eth wlan xbacklight pulseaudio battery0 battery1 date
 
 tray-position = right
 tray-padding = 2
@@ -352,9 +352,45 @@ bar-volume-empty = ─
 bar-volume-empty-font = 2
 bar-volume-empty-foreground = ${colors.foreground-alt}
 
-[module/battery]
+[module/battery0]
 type = internal/battery
 battery = BAT0
+adapter = AC
+full-at = 100
+animation-charging-font = 2
+
+format-charging = <animation-charging> <label-charging>
+format-discharging = <ramp-capacity> <label-discharging>
+format-full = <label-full>
+
+label-full =  100%
+format-full-foreground = #fff
+
+ramp-capacity-0 =
+ramp-capacity-1 =
+ramp-capacity-2 =
+ramp-capacity-3 =
+ramp-capacity-4 =
+ramp-capacity-5 =
+ramp-capacity-6 =
+ramp-capacity-7 =
+ramp-capacity-8 =
+ramp-capacity-9 =
+ramp-capacity-foreground = #fff
+
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+animation-charging-5 = 
+animation-charging-6 = 
+animation-charging-foreground = #fff
+animation-charging-framerate = 750
+
+[module/battery1]
+type = internal/battery
+battery = BAT1
 adapter = AC
 full-at = 100
 animation-charging-font = 2
