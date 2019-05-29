@@ -56,8 +56,13 @@ function fish_prompt
         set_color normal
         printf '%s ' (__fish_git_prompt) | sed 's/(/[ /;s/)/ ]/'
         # cursor
-        set_color 00aaff
-        printf "\n 🐟 "
+        printf "\n "
+        set_color 8233cd
+        echo -n -s " >"
+        set_color 53e3fb
+        echo -n -s ">"
+        set_color d5e1f1
+        echo -n -s "> "
         set_color normal
         printf "\n"
 end
