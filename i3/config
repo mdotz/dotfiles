@@ -64,7 +64,7 @@ bindsym $mod+d exec rofi -show drun
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # Screenshots to clipboard
-# bindsym Print exec "scrot -s ~/Images/Screenshots/tmp.png && xclip ~/Images/Screenshots/tmp.png && rm ~/Images/Screenshots/tmp.png"
+bindsym Print exec "maim -s | xclip -selection clipboard -t image/png"
 bindsym --release Print exec scrot -s ~/Images/Screenshots/tmp.png && \
                              xclip -selection clipboard -t image/png ~/Images/Screenshots/tmp.png
 
