@@ -1,5 +1,5 @@
 # Borders for all windows
-for_window [class="^.*"] border pixel 1
+for_window [class="^.*"] border pixel 2
 
 # Border color
 client.focused #8cb8c5 #8cb8c5 #8cb8c5 #8cb8c5 #8cb8c5
