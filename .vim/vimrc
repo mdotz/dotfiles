@@ -25,6 +25,10 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'elixir-editors/vim-elixir'
 Plugin 'dag/vim-fish'
+Plugin 'junegunn/fzf.vim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'mechatroner/rainbow_csv'
+Plugin 'tomasr/molokai'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -42,7 +46,16 @@ filetype plugin indent on    " required
 
 syntax on
 
-colorscheme dracula
+colorscheme molokai
+
+if system('arch') == 'arm64'
+  set rtp+=/opt/homebrew/opt/fzf
+else
+  set rtp+=/usr/local/opt/fzf
+endif
+
+" install bat for syntax highlighting
+let g:ackprg='rg --vimgrep --no-heading'
 
 set tabstop=2       "spaces per tab when reading file
 set softtabstop=2   "spaces per tab when editing file
@@ -61,6 +74,12 @@ nnoremap <S-H> <C-W><C-H>
 nnoremap <S-L> <C-W><C-L>
 nnoremap <S-J> <C-W><C-J>
 nnoremap <S-K> <C-W><C-K>
+
+nnoremap <Leader>f :Files<CR>
+nnoremap <Leader>g :GitFiles<CR>
+nnoremap <Leader>b :Buffers<CR>
+nnoremap <Leader>r :Rg<CR>
+nnoremap <Leader>t :NERDTreeFind<CR>
 
 autocmd FileType ruby set shiftwidth=2 " indent for ruby
 autocmd FileType c    set shiftwidth=4 " indent for C
