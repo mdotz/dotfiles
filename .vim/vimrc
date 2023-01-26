@@ -29,6 +29,9 @@ Plugin 'junegunn/fzf.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'mechatroner/rainbow_csv'
 Plugin 'tomasr/molokai'
+Plugin 'mtdl9/vim-log-highlighting'
+Plugin 'moll/vim-bbye'
+Plugin 'mhinz/vim-signify'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -70,6 +73,8 @@ set wildmenu        "visual autocompletion
 set incsearch       "search as typing
 set hlsearch        "highlight matches
 
+set hidden          "allow closing tab without closing buffer
+
 nnoremap <S-H> <C-W><C-H>
 nnoremap <S-L> <C-W><C-L>
 nnoremap <S-J> <C-W><C-J>
@@ -80,12 +85,15 @@ nnoremap <Leader>g :GitFiles<CR>
 nnoremap <Leader>b :Buffers<CR>
 nnoremap <Leader>r :Rg<CR>
 nnoremap <Leader>t :NERDTreeFind<CR>
+nnoremap <Leader>q :Bdelete<CR>
 
 autocmd FileType ruby set shiftwidth=2 " indent for ruby
 autocmd FileType c    set shiftwidth=4 " indent for C
 
 " NerdTree
 let NERDTreeShowHidden=1
+let g:NERDTreeMinimalMenu=1 " fix for bottom panel staying bigger after <m> or <a>
+
 autocmd vimenter * NERDTree            " opens nerd tree on vim start
 " quits vim if nerd tree is the only pane left
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
