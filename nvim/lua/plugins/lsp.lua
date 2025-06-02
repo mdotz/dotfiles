@@ -28,16 +28,16 @@ return {
 
       local lspconfig = require('lspconfig')
 
-      mason_lspconfig.setup_handlers {
-        function(server_name)
-          lspconfig[server_name].setup {
-            capabilities = capabilities,
-            on_attach = on_attach,
-            settings = servers[server_name],
-            filetypes = (servers[server_name] or {}).filetypes,
-          }
-        end
-      }
+      -- mason_lspconfig.setup_handlers {
+        -- function(server_name)
+          -- lspconfig[server_name].setup {
+            -- capabilities = capabilities,
+            -- on_attach = on_attach,
+            -- settings = servers[server_name],
+            -- filetypes = (servers[server_name] or {}).filetypes,
+          -- }
+        -- end
+      -- }
 
       lspconfig.ts_ls.setup({
         settings = {
