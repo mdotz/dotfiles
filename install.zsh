@@ -34,37 +34,47 @@ ln -s $(pwd)/zellij ~/.config/zellij
 echo "*** *** ***"
 
 echo "*** Installing oh-my-zsh ***"
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+if [[ -z "$ZSH" ]]; then
+  echo "  oh-my-zsh already installed"
+  ZSH="${ZSH:-$HOME/.oh-my-zsh}"
+  ZSH_CUSTOM="${ZSH_CUSTOM:-$ZSH/custom}"
+else
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+fi
 
 echo "*** *** ***"
 
 echo "*** Adding stuff to zshrc ***"
 ZSHRC_PATH="$HOME/.zshrc"
-BREW_EVAL="eval \$(/opt/homebrew/bin/brew shellenv)"
+SOURCE_COMMAND="source $(pwd)/.zshrc_dotfiles"
 
-if grep -Fxq "$BREW_EVAL" "$ZSHRC_PATH"; then
-    echo "  Line '$BREW_EVAL' already exists in $ZSHRC_PATH"
+if grep -q "$SOURCE_COMMAND" "$ZSHRC_PATH"; then
+    echo "  Line '$SOURCE_COMMAND' already exists in $ZSHRC_PATH"
 else
-     printf '%s\n%s' "$BREW_EVAL" "$(cat "$ZSHRC_PATH")" > "$ZSHRC_PATH"
-    echo "  Added '$BREW_EVAL' to beginning of $ZSHRC_PATH"
+     echo $SOURCE_COMMAND >> $ZSHRC_PATH
+     echo "  Added '$SOURCE_COMMAND' to $ZSHRC_PATH"
+     echo "  !!! Note that parts of your .zshrc might be overriden by .zshrc_dotfiles !!!"
 fi
 
-YAZI_FUNCTION='function y() {
-	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
-	yazi "$@" --cwd-file="$tmp"
-	IFS= read -r -d '\'''\'' cwd < "$tmp"
-	[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
-	rm -f -- "$tmp"
-}'
+source "$ZSHRC_PATH"
 
-if grep -q "function y()" "$ZSHRC_PATH"; then
-    echo "  Function y() already exists in $ZSHRC_PATH"
+if [[ -z "$ZSH_CUSTOM" ]]; then
+  echo "!!! zsh custom not set !!!"
 else
-    echo "" >> "$ZSHRC_PATH"  # Add blank line before function
-    echo "$YAZI_FUNCTION" >> "$ZSHRC_PATH"
-    echo "" >> "$ZSHRC_PATH"  # Add blank line after function
-    echo "  Added yazi function y() to $ZSHRC_PATH"
+  git clone https://github.com/jeffreytse/zsh-vi-mode $ZSH_CUSTOM/plugins/zsh-vi-mode
+
+  git clone https://github.com/marlonrichert/zsh-autocomplete $ZSH_CUSTOM/plugins/zsh-autocomplete
+
+  git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
 fi
+
+PLUGINS_LINE_NUMBER=$(grep -n '^\s*plugins=' $ZSHRC_PATH | tail -1 | cut -d: -f1)
+PLUGINS="git zsh-vi-mode zsh-autocomplete zsh-autosuggestions"
+
+sed -i '' "${PLUGINS_LINE_NUMBER}c\\
+plugins=($PLUGINS)\\
+" "$ZSHRC_PATH"
 
 echo "*** *** ***"
 
