@@ -23,19 +23,19 @@ echo "*** *** ***"
 echo "*** Creating config symlinks ***"
 
 echo "- kitty"
-ln -s $(pwd)/kitty ~/.config/kitty
+ln -sfh $(pwd)/kitty ~/.config/kitty
 
 echo "- nvim"
-ln -s $(pwd)/nvim ~/.config/nvim
+ln -sfh $(pwd)/nvim ~/.config/nvim
 
 echo "- zellij"
-ln -s $(pwd)/zellij ~/.config/zellij
+ln -sfh $(pwd)/zellij ~/.config/zellij
 
 echo "*** *** ***"
 
 echo "*** Installing oh-my-zsh ***"
 
-if [[ -z "$ZSH" ]]; then
+if [[ -n "$ZSH" ]]; then
   echo "  oh-my-zsh already installed"
   ZSH="${ZSH:-$HOME/.oh-my-zsh}"
   ZSH_CUSTOM="${ZSH_CUSTOM:-$ZSH/custom}"
@@ -64,13 +64,11 @@ if [[ -z "$ZSH_CUSTOM" ]]; then
 else
   git clone https://github.com/jeffreytse/zsh-vi-mode $ZSH_CUSTOM/plugins/zsh-vi-mode
 
-  git clone https://github.com/marlonrichert/zsh-autocomplete $ZSH_CUSTOM/plugins/zsh-autocomplete
-
   git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
 fi
 
 PLUGINS_LINE_NUMBER=$(grep -n '^\s*plugins=' $ZSHRC_PATH | tail -1 | cut -d: -f1)
-PLUGINS="git zsh-vi-mode zsh-autocomplete zsh-autosuggestions"
+PLUGINS="git zsh-vi-mode zsh-autosuggestions"
 
 sed -i '' "${PLUGINS_LINE_NUMBER}c\\
 plugins=($PLUGINS)\\
