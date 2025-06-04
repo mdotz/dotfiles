@@ -18,6 +18,9 @@ brew install yazi
 echo "- zellij"
 brew install zellij
 
+echo "- asdf"
+brew install asdf
+
 echo "*** *** ***"
 
 echo "*** Creating config symlinks ***"
