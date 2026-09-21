@@ -21,6 +21,24 @@ brew install zellij
 echo "- asdf"
 brew install asdf
 
+echo "- pkgconfig"
+brew install pkgconfig
+
+echo "- libyaml"
+brew install libyaml
+
+echo "- imagemagick"
+brew install imagemagick
+
+echo "- postgresql"
+brew install postgresql
+
+echo "- ripgrep"
+brew install ripgrep
+
+echo "- fd"
+brew install fd
+
 echo "*** *** ***"
 
 echo "*** Creating config symlinks ***"
@@ -71,7 +89,7 @@ else
 fi
 
 PLUGINS_LINE_NUMBER=$(grep -n '^\s*plugins=' $ZSHRC_PATH | tail -1 | cut -d: -f1)
-PLUGINS="git zsh-vi-mode zsh-autosuggestions"
+PLUGINS="git zsh-vi-mode zsh-autosuggestions asdf"
 
 sed -i '' "${PLUGINS_LINE_NUMBER}c\\
 plugins=($PLUGINS)\\

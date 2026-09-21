@@ -26,20 +26,7 @@ return {
         ensure_installed = vim.tbl_keys(servers),
       }
 
-      local lspconfig = require('lspconfig')
-
-      -- mason_lspconfig.setup_handlers {
-        -- function(server_name)
-          -- lspconfig[server_name].setup {
-            -- capabilities = capabilities,
-            -- on_attach = on_attach,
-            -- settings = servers[server_name],
-            -- filetypes = (servers[server_name] or {}).filetypes,
-          -- }
-        -- end
-      -- }
-
-      lspconfig.ts_ls.setup({
+      vim.lsp.config('ts_ls', {
         settings = {
           logging = {
             -- Enables logging to a file
@@ -49,13 +36,15 @@ return {
           }
         }
       })
+      vim.lsp.enable('ts_ls')
 
-      lspconfig.ruby_lsp.setup({
+      vim.lsp.config('ruby_lsp', {
         init_options = {
           formatter = 'rubocop',
           linters = { 'rubocop' },
         },
       })
+      vim.lsp.enable('ruby_lsp')
 
       local builtin = require('telescope.builtin')
 

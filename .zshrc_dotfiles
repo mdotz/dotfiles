@@ -2,6 +2,11 @@ eval $(/opt/homebrew/bin/brew shellenv)
 
 export EDITOR=nvim
 
+export CPATH=$(brew --prefix)/include
+export LIBRARY_PATH=$(brew --prefix)/lib
+
+alias hcc="headroom wrap claude"
+
 function y() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
 	yazi "$@" --cwd-file="$tmp"
@@ -9,3 +14,5 @@ function y() {
 	[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
 	rm -f -- "$tmp"
 }
+
+. /opt/homebrew/opt/asdf/libexec/asdf.sh
